@@ -1,0 +1,7 @@
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\bin\Debug\MiniMaxConsole.exe.config
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\bin\Debug\MiniMaxConsole.exe
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\bin\Debug\MiniMaxConsole.pdb
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\obj\Debug\MiniMaxConsole.csprojResolveAssemblyReference.cache
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\obj\Debug\MiniMaxConsole.csproj.CoreCompileInputs.cache
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\obj\Debug\MiniMaxConsole.exe
+C:\Users\ShaKy\Documents\Visual Studio 2017\Projects\MiniMaxConsole\MiniMaxConsole\obj\Debug\MiniMaxConsole.pdb
