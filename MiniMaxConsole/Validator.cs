@@ -74,65 +74,41 @@ namespace MiniMaxConsole
                 if (moves[0, 0] == temp[i].name && moves[0, 1] == temp[i].name && moves[0, 2] == temp[i].name)
                 {
                     decision = true;
-                    champ.Add(temp[i].name, decision);
-                    champ.Add("1",decision);
-                    champ.Add("2", decision);
-                    champ.Add("3", decision);
+                    champ.Add(temp[i].name, decision);                   
                 }
                 else if (moves[0, 2] == temp[i].name && moves[1, 1] == temp[i].name && moves[2, 0] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("3", decision);
-                    champ.Add("5", decision);
-                    champ.Add("7", decision);
                 }
                 else if (moves[0, 0] == temp[i].name && moves[1, 1] == temp[i].name && moves[2, 2] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("1", decision);
-                    champ.Add("5", decision);
-                    champ.Add("9", decision);
                 }
                 else if (moves[1, 0] == temp[i].name && moves[1, 1] == temp[i].name && moves[1, 2] == temp[i].name)
                 { decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("4", decision);
-                    champ.Add("5", decision);
-                    champ.Add("6", decision);
                 }
                 else if (moves[2, 0] == temp[i].name && moves[2, 1] == temp[i].name && moves[2, 2] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("7", decision);
-                    champ.Add("8", decision);
-                    champ.Add("9", decision);
                 }
                 else if (moves[0, 0] == temp[i].name && moves[1, 0] == temp[i].name && moves[2, 0] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("1", decision);
-                    champ.Add("4", decision);
-                    champ.Add("7", decision);
                 }
                 else if (moves[0, 1] == temp[i].name && moves[1, 1] == temp[i].name && moves[2, 1] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("2", decision);
-                    champ.Add("5", decision);
-                    champ.Add("8", decision);
                 }
                 else if (moves[0, 2] == temp[i].name && moves[1, 2] == temp[i].name && moves[2, 2] == temp[i].name)
                 {
                     decision = true;
                     champ.Add(temp[i].name, decision);
-                    champ.Add("3", decision);
-                    champ.Add("6", decision);
-                    champ.Add("9", decision);
                 }
                 else
                 {

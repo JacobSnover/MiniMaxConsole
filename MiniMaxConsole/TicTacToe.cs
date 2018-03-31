@@ -8,7 +8,7 @@ namespace MiniMaxConsole
 {
     class TicTacToe
     {
-
+        private static string bestDefense = "";
         private static int side = 1; //so alogorithm knows which side to judge for
         private static int mod = 1; //if user goes second then this gets changed later on
         private static int turn = 1; //used to dtermine what turn the game is on
@@ -17,32 +17,45 @@ namespace MiniMaxConsole
         private static string[] choices = new string[9]; //keeps track of available choices, might not be needed
         public static string[,] moves = new string[3, 3]; //simplified game board
         private static Random start = new Random(); //to pick opening move for AI
-        private static string[] startMoves = { "1", "3", "7", "9" };
+        private static string[] startMoves = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; //this array is picked from randomly if AI goes first since AI is unbeatable
 
-
+        //method that runs the whole game
         public static void Game(string[,] board, Player player, Player scndPlayer, bool first)
         {
+            if (turn == 1)
+                bestDefense = MiniMax.BestDefense();
+            //string will hold the champs name
             string champ = ""; bool victory = true;
 
+            //checks for which players turn it is by using modulus
             if (turn % 2 == mod && first == true)
             {
+                //check for proper move choice
                 player.choice = Validator.ValidChoice(player, choices);
 
+                //display the board
                 board = PlayerChoice(board, player, scndPlayer, choices);
                 ConsoleBoardDisplay(board);
 
+                //check if player has won
                 victDict = Validator.Judge(moves, player, scndPlayer);
+
+                //change side to other player this variable is used in the MiniMax algo
                 side = 2;
+                //set champs name to current player
                 champ = player.name;
+                //increment counter to check for a draw
                 draw++;
+                //increment turn counter to change sides
                 turn++;
             }
             else if (turn % 2 != mod && first == true)
             {
-                if (board[2, 5] == "5")
+                
+                if (board[2, 5] == bestDefense)
                 {
                     board[2, 5] = scndPlayer.name;
-                    choices[0] = "5";
+                    choices[0] = bestDefense;
                     moves[1, 1] = scndPlayer.name;
                 }
                 else
@@ -71,7 +84,10 @@ namespace MiniMaxConsole
             }
 
             if (victDict.ContainsValue(false) && draw == 9)
-                Console.WriteLine("\nDraw!!\n");
+            {
+                Console.WriteLine("\nDraw!!\nPress any key to exit.");
+                Console.ReadLine();
+            }
             else if (!victDict.ContainsValue(true))
                 Game(board, player, scndPlayer, first);
             else
@@ -81,7 +97,7 @@ namespace MiniMaxConsole
         private static string[,] PlayerChoice(string[,] board, Player player, Player scndPlayer, string[] choices)
         {
             if (player.choice == null)
-                player.choice = startMoves[start.Next(0, 3)];
+                player.choice = bestDefense;
 
             if (board[0, 1] == player.choice && board[0, 1] != player.name && board[0, 1] != scndPlayer.name)
             {

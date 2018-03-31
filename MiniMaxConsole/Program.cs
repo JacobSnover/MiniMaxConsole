@@ -36,6 +36,7 @@ namespace MiniMaxConsole
             //method that starts the game
             TicTacToe.Game(board, player, scndPlayer, first);
             Console.ReadLine();
+
         }
     }
 }
