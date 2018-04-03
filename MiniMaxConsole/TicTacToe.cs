@@ -22,6 +22,7 @@ namespace MiniMaxConsole
         //method that runs the whole game
         public static void Game(string[,] board, Player player, Player scndPlayer, bool first)
         {
+            //algo that determines best move of the game
             if (turn == 1)
                 bestDefense = MiniMax.BestDefense();
             //string will hold the champs name
@@ -51,7 +52,7 @@ namespace MiniMaxConsole
             }
             else if (turn % 2 != mod && first == true)
             {
-                
+                //checks if best move is taken and if not then select it
                 if (board[2, 5] == bestDefense)
                 {
                     board[2, 5] = scndPlayer.name;
@@ -60,124 +61,150 @@ namespace MiniMaxConsole
                 }
                 else
                 {
+                    //use minimax algo to create AI
                     scndPlayer.choice = MiniMax.Magic(moves, side, player, scndPlayer);
                     board = PlayerChoice(board, scndPlayer, player, choices);
                 }
 
+                //display boardd
                 ConsoleBoardDisplay(board);
 
+                //check for a victor
                 victDict = Validator.Judge(moves, player, scndPlayer);
+                //change sides
                 side = 1;
+                //set champs name to current player
                 champ = scndPlayer.name;
+                //increment counter to check for a draw
                 draw++;
+                //increment turn counter to change sides
                 turn++;
             }
             else
             {
+                //display the board
                 board = PlayerChoice(board, scndPlayer, player, choices);
                 ConsoleBoardDisplay(board);
+                //check for victor
                 victDict = Validator.Judge(moves, player, scndPlayer);
                 draw++;
                 turn++;
+                //set bool and modulus variable to true to change state of the game
                 first = true;
                 mod = 0;
             }
 
+            //check for draw
             if (victDict.ContainsValue(false) && draw == 9)
             {
                 Console.WriteLine("\nDraw!!\nPress any key to exit.");
                 Console.ReadLine();
             }
-            else if (!victDict.ContainsValue(true))
+            else if (!victDict.ContainsValue(true))//check for victor contnue if no victor, and no draw
                 Game(board, player, scndPlayer, first);
             else
-                ConsoleVictory(champ);
+                ConsoleVictory(champ);//celebrate the champ
         }
 
         private static string[,] PlayerChoice(string[,] board, Player player, Player scndPlayer, string[] choices)
         {
+            //if AI chooses first move of the game then it chooses predetermined best move
             if (player.choice == null)
+            {
                 player.choice = bestDefense;
-
-            if (board[0, 1] == player.choice && board[0, 1] != player.name && board[0, 1] != scndPlayer.name)
-            {
-                board[0, 1] = player.name;
-                choices[0] = "1";
-                moves[0, 0] = player.name;
-            }
-            else if (board[0, 5] == player.choice && board[0, 5] != player.name && board[0, 5] != scndPlayer.name)
-            {
-                board[0, 5] = player.name;
-                choices[0] = "2";
-                moves[0, 1] = player.name;
-            }
-            else if (board[0, 9] == player.choice && board[0, 9] != player.name && board[0, 9] != scndPlayer.name)
-            {
-                board[0, 9] = player.name;
-                choices[0] = "3";
-                moves[0, 2] = player.name;
-            }
-            else if (board[2, 1] == player.choice && board[2, 1] != player.name && board[2, 1] != scndPlayer.name)
-            {
-                board[2, 1] = player.name;
-                choices[0] = "4";
-                moves[1, 0] = player.name;
-            }
-            else if (board[2, 5] == player.choice && board[2, 5] != player.name && board[2, 5] != scndPlayer.name)
-            {
                 board[2, 5] = player.name;
-                choices[0] = "5";
+                choices[0] = bestDefense;
                 moves[1, 1] = player.name;
+                return board;
             }
-            else if (board[2, 9] == player.choice && board[2, 9] != player.name && board[2, 9] != scndPlayer.name)
+          
+            while (true)
             {
-                board[2, 9] = player.name;
-                choices[0] = "6";
-                moves[1, 2] = player.name;
-            }
-            else if (board[4, 1] == player.choice && board[4, 1] != player.name && board[4, 1] != scndPlayer.name)
-            {
-                board[4, 1] = player.name;
-                choices[0] = "7";
-                moves[2, 0] = player.name;
-            }
-            else if (board[4, 5] == player.choice && board[4, 5] != player.name && board[4, 5] != scndPlayer.name)
-            {
-                board[4, 5] = player.name;
-                choices[0] = "8";
-                moves[2, 1] = player.name;
-            }
-            else if (board[4, 9] == player.choice && board[4, 9] != player.name && board[4, 9] != scndPlayer.name)
-            {
-                board[4, 9] = player.name;
-                choices[0] = "9";
-                moves[2, 2] = player.name;
-            }
-            else Error();
-
-            return board;
+                //check if selection is taken, and if not then select it
+                if (board[0, 1] == player.choice && board[0, 1] != player.name && board[0, 1] != scndPlayer.name)
+                {
+                    board[0, 1] = player.name;
+                    choices[0] = "1";
+                    moves[0, 0] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[0, 5] == player.choice && board[0, 5] != player.name && board[0, 5] != scndPlayer.name)
+                {
+                    board[0, 5] = player.name;
+                    choices[0] = "2";
+                    moves[0, 1] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[0, 9] == player.choice && board[0, 9] != player.name && board[0, 9] != scndPlayer.name)
+                {
+                    board[0, 9] = player.name;
+                    choices[0] = "3";
+                    moves[0, 2] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[2, 1] == player.choice && board[2, 1] != player.name && board[2, 1] != scndPlayer.name)
+                {
+                    board[2, 1] = player.name;
+                    choices[0] = "4";
+                    moves[1, 0] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[2, 5] == player.choice && board[2, 5] != player.name && board[2, 5] != scndPlayer.name)
+                {
+                    board[2, 5] = player.name;
+                    choices[0] = "5";
+                    moves[1, 1] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[2, 9] == player.choice && board[2, 9] != player.name && board[2, 9] != scndPlayer.name)
+                {
+                    board[2, 9] = player.name;
+                    choices[0] = "6";
+                    moves[1, 2] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[4, 1] == player.choice && board[4, 1] != player.name && board[4, 1] != scndPlayer.name)
+                {
+                    board[4, 1] = player.name;
+                    choices[0] = "7";
+                    moves[2, 0] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[4, 5] == player.choice && board[4, 5] != player.name && board[4, 5] != scndPlayer.name)
+                {
+                    board[4, 5] = player.name;
+                    choices[0] = "8";
+                    moves[2, 1] = player.name;
+                    return board;
+                }//check if selection is taken, and if not then select it
+                else if (board[4, 9] == player.choice && board[4, 9] != player.name && board[4, 9] != scndPlayer.name)
+                {
+                    board[4, 9] = player.name;
+                    choices[0] = "9";
+                    moves[2, 2] = player.name;
+                    return board;
+                }
+                else Error();//selection validation
+                player.choice = Validator.ValidChoice(player,choices);//loop until proper input
+            }           
         }
-
+        //method that displays the game board
         public static void ConsoleBoardDisplay(string[,] board)
         {
             Console.Clear();
             int counter = 0;
             for (int i = 0; i < 5; i++)
             {
-
                 for (int j = 0; j < 11; j++)
                 {
-
                     Console.Write(board[i, j]);
                     if (counter == 10 || counter == 21 || counter == 32 || counter == 43 || counter == 54)
                         Console.WriteLine();
                     counter++;
                 }
-
             }
-
         }
-
+        ///builds/displays the board for the first time
         public static string[,] BoardStart()
         {
             string[,] board = new string[5, 11];
@@ -201,17 +228,20 @@ namespace MiniMaxConsole
 
             return board;
         }
-
+        //if there is a victor
         private static void ConsoleVictory(string champ)
         {
-            Console.WriteLine($"\n{champ} Wins!!\n");
+            Console.WriteLine($"\n{champ} Wins!!\nPress any key to exit.");
+            Console.ReadLine();
         }
-
-        private static void Error()
+        //if there is an error
+        private static bool Error()
         {
+            bool correct = true;
             Console.Clear();
             Console.WriteLine("\nInvalid choice!!\nPress any key to try again.\n");
             Console.ReadLine();
+            return correct;
         }
 
 

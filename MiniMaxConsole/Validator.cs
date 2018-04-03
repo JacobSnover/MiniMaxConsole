@@ -9,6 +9,7 @@ namespace MiniMaxConsole
 {
     class Validator
     {
+        //validates for either n X or an O
         public static string ValidUser()
         {
             Console.Write("\nType exit to quit playing or,\nPlay as X or O:");
@@ -26,7 +27,7 @@ namespace MiniMaxConsole
             }
             return data;
         }
-
+        //validates for if user goes first or second
         public static string ValidTurn()
         {
             Console.WriteLine("\nType exit to quit playing or,\nMake the first move? Y/N");
@@ -44,7 +45,7 @@ namespace MiniMaxConsole
             }
             return data;
         }
-
+        //validates for proper choice on the board
         public static string ValidChoice(Player player, string[] choices)
         {
             Regex reggie = new Regex(@"^[1-9]$");
@@ -62,7 +63,7 @@ namespace MiniMaxConsole
             return player.choice;
 
         }
-
+        //checks for victory, put this in validator instead of game because of being final decision
         public static Dictionary<string,bool> Judge(string[,] moves, Player player, Player scndPlayer)
         {
             Dictionary<string, bool> champ = new Dictionary<string, bool>();
