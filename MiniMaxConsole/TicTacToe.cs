@@ -8,13 +8,13 @@ namespace MiniMaxConsole
 {
     class TicTacToe
     {
-        private static string bestDefense = "";
+        private static string bestDefense = ""; //will be the best defensive choice
         private static int side = 1; //so alogorithm knows which side to judge for
         private static int mod = 1; //if user goes second then this gets changed later on
         private static int turn = 1; //used to determine what turn the game is on
         private static int draw = 0; //counter for when game is over
-        private static int bestRow = 0;
-        private static int bestCol = 0;
+        private static int bestRow = 0; //row index of best choice
+        private static int bestCol = 0; //column index of best choice
         public static Dictionary<string, bool> victDict = new Dictionary<string, bool>(); //to store output from algo
         private static string[] choices = new string[9]; //keeps track of available choices for validation
         public static string[,] moves = new string[3, 3]; //simplified game board

@@ -28,16 +28,20 @@ namespace MiniMaxConsole
 
             //asking the user to go first or second
             string data = Validator.ValidTurn().ToUpper();
-            if (data == "YES" || data == "Y") first = true;
-            else first = false;
+            if (data == "YES" || data == "Y")
+                first = true;
+            else
+                first = false;
 
             //this is where I build the game board that will be displayed
             string[,] board = TicTacToe.BoardStart();
             //display the game board
             TicTacToe.ConsoleBoardDisplay(board);
             //set what AI will play as depending on user choice
-            if (player.name == "X") scndPlayer.name = "O";
-            else scndPlayer.name = "X";
+            if (player.name == "X")
+                scndPlayer.name = "O";
+            else
+                scndPlayer.name = "X";
             //method that starts the game
             TicTacToe.Game(board, player, scndPlayer, first);
         }
