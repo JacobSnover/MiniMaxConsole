@@ -18,7 +18,8 @@ namespace MiniMaxConsole
             while (data != "X" && data != "O")
             {
 
-                if (data.ToUpper() == "EXIT") Environment.Exit(1);
+                if (data.ToUpper() == "EXIT")
+                    Environment.Exit(1);
 
                 Console.WriteLine("\nInvalid Choice");
                 Console.Write("\nType exit to quit playing or,\nPlay as X or O:");
@@ -36,7 +37,8 @@ namespace MiniMaxConsole
             while (data != "Y" && data != "YES" && data != "N" && data != "NO")
             {
 
-                if (data.ToUpper() == "EXIT") Environment.Exit(1);
+                if (data.ToUpper() == "EXIT")
+                    Environment.Exit(1);
 
                 Console.WriteLine("\nInvalid Choice");
                 Console.WriteLine("\nType exit to quit playing or,\nMake the first move? Y/N");
@@ -54,7 +56,9 @@ namespace MiniMaxConsole
             player.choice = Console.ReadLine();
             while (!reggie.IsMatch(player.choice) || choices.Contains(player.choice))
             {
-                if (player.choice.ToUpper() == "EXIT") Environment.Exit(1);
+                if (player.choice.ToUpper() == "EXIT")
+                    Environment.Exit(1);
+
                 Console.WriteLine("\nInvalid Choice\n");
                 Console.Write("\nChoice: ");
                 player.choice = "";

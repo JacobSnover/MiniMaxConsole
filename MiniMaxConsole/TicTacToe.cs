@@ -11,22 +11,40 @@ namespace MiniMaxConsole
         private static string bestDefense = "";
         private static int side = 1; //so alogorithm knows which side to judge for
         private static int mod = 1; //if user goes second then this gets changed later on
-        private static int turn = 1; //used to dtermine what turn the game is on
+        private static int turn = 1; //used to determine what turn the game is on
         private static int draw = 0; //counter for when game is over
+        private static int bestRow = 0;
+        private static int bestCol = 0;
         public static Dictionary<string, bool> victDict = new Dictionary<string, bool>(); //to store output from algo
-        private static string[] choices = new string[9]; //keeps track of available choices, might not be needed
+        private static string[] choices = new string[9]; //keeps track of available choices for validation
         public static string[,] moves = new string[3, 3]; //simplified game board
         private static Random start = new Random(); //to pick opening move for AI
         private static string[] startMoves = { "1", "2", "3", "4", "5", "6", "7", "8", "9" }; //this array is picked from randomly if AI goes first since AI is unbeatable
 
+
         //method that runs the whole game
         public static void Game(string[,] board, Player player, Player scndPlayer, bool first)
         {
+
             //algo that determines best move of the game
             if (turn == 1)
+            {
                 bestDefense = MiniMax.BestDefense();
+
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 11; j++)
+                    {
+                        if (board[i, j] == bestDefense)
+                        {
+                            bestRow = i;
+                            bestCol = j;
+                        }
+                    }
+                }
+            }
             //string will hold the champs name
-            string champ = ""; bool victory = true;
+            string champ = "";
 
             //checks for which players turn it is by using modulus
             if (turn % 2 == mod && first == true)
@@ -53,9 +71,9 @@ namespace MiniMaxConsole
             else if (turn % 2 != mod && first == true)
             {
                 //checks if best move is taken and if not then select it
-                if (board[2, 5] == bestDefense)
+                if (board[bestRow, bestCol] == bestDefense)
                 {
-                    board[2, 5] = scndPlayer.name;
+                    board[bestRow, bestCol] = scndPlayer.name;
                     choices[0] = bestDefense;
                     moves[1, 1] = scndPlayer.name;
                 }
@@ -97,8 +115,15 @@ namespace MiniMaxConsole
             //check for draw
             if (victDict.ContainsValue(false) && draw == 9)
             {
+                //resets the game board and all necessary variables
+                moves = new string[3, 3];
+                side = 1;
+                mod = 1; 
+                turn = 1;
+                draw = 0;
                 Console.WriteLine("\nDraw!!\nPress any key to exit.");
                 Console.ReadLine();
+                Program.Continue();
             }
             else if (!victDict.ContainsValue(true))//check for victor contnue if no victor, and no draw
                 Game(board, player, scndPlayer, first);
@@ -117,7 +142,7 @@ namespace MiniMaxConsole
                 moves[1, 1] = player.name;
                 return board;
             }
-          
+
             while (true)
             {
                 //check if selection is taken, and if not then select it
@@ -185,8 +210,8 @@ namespace MiniMaxConsole
                     return board;
                 }
                 else Error();//selection validation
-                player.choice = Validator.ValidChoice(player,choices);//loop until proper input
-            }           
+                player.choice = Validator.ValidChoice(player, choices);//loop until proper input
+            }
         }
         //method that displays the game board
         public static void ConsoleBoardDisplay(string[,] board)
@@ -231,8 +256,15 @@ namespace MiniMaxConsole
         //if there is a victor
         private static void ConsoleVictory(string champ)
         {
+            //resets the game board
+            moves = new string[3, 3];
+            side = 1;
+            mod = 1;
+            turn = 1;
+            draw = 0;
             Console.WriteLine($"\n{champ} Wins!!\nPress any key to exit.");
             Console.ReadLine();
+            Program.Continue();
         }
         //if there is an error
         private static bool Error()

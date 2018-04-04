@@ -11,7 +11,12 @@ namespace MiniMaxConsole
     {
         static void Main(string[] args)
         {
+            Game();
 
+        }
+
+        public static void Game()
+        {
             //this bool determines if the user goes first
             bool first = true;
 
@@ -35,8 +40,19 @@ namespace MiniMaxConsole
             else scndPlayer.name = "X";
             //method that starts the game
             TicTacToe.Game(board, player, scndPlayer, first);
-            
+        }
 
+        public static void Continue()
+        {
+            while (true)
+            {
+                Console.WriteLine("Play again? Y/N");
+                string input = Console.ReadLine().ToUpper();
+                if (input == "Y" || input == "YES")
+                    Game();
+                else if (input == "N" || input == "NO")
+                    Environment.Exit(1);
+            }
         }
     }
 }
